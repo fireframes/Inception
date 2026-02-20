@@ -4,7 +4,7 @@ set -e
 # Ensure installation happens in the web root
 cd /var/www/html
 
-# 1. FIX: Increase memory limit for the current script execution
+# 1. Increase memory limit for the current script execution
 export PHP_INI_SCAN_DIR=/etc/php82/conf.d
 echo "memory_limit=512M" > /etc/php82/conf.d/memory-fix.ini
 
@@ -13,7 +13,7 @@ while ! mariadb-admin ping -h"mariadb" -u $MYSQL_USER -p$MYSQL_PASSWORD --silent
     sleep 1
 done
 
-# 2. FIX: Check for wp-login.php instead of index.php (more reliable)
+# 2. Check for wp-login.php instead of index.php (more reliable)
 if [ ! -f "wp-login.php" ]; then
     echo "Downloading WordPress..."
     wp core download --allow-root
